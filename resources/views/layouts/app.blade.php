@@ -12,7 +12,7 @@
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/style.css') }}?version=1.1" rel="stylesheet">
+        <link href="{{ asset('css/style.css') }}?version=1.0" rel="stylesheet">
         <link rel="icon" href="{{ asset('http://www.friella.com.br/assets/outside/images/favicon.ico') }}" >
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <!-- icheck checkboxes -->
