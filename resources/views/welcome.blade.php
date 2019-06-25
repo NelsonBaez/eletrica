@@ -2,7 +2,7 @@
     @section('pagetitle', 'index')
     @section('content')  <!-- define que o codigo dentro dessa variavel é o conteudo expresso na extenção -->
         <main role="main">
-            <div class="container py-4 px-2"> 
+            <div class="container-fluid py-4"> 
                 <div class="row justify-content-around mt-5 mb-5">
                     <div class="col-md-12 text-center">
                         <h3>Calculo de resistores</h3>
@@ -54,24 +54,187 @@
                     {{ Form::close()}}
                 </div>
                 <div class="bg-white p-5 mt-5 h4">
-                    <div class="form-row text-center">
+                    <div class="form-row ">
                         <div class="col-md-4">
-                            Req em série:
-                            @if(isset($req_serie))
-                                <span class="text-primary">{{ number_format($req_serie,2,',','.') }} {{ $tipo }}</span>
-                            @endif
+                            <div class="rowtext-center">
+                                <h3>Associados em Série</h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    Req:
+                                </div>
+                                @if(isset($req_serie))
+                                    <div class="col-md-6">
+                                        <span class="text-primary">{{ number_format($req_serie,2,',','.') }} {{ $tipo }}</span>
+                                    </div>
+                                @endif                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    Corrente Total:
+                                </div>
+                                @if(isset($corrente_total_serie))
+                                    <div class="col-md-3">
+                                        <span class="text-primary">{{ number_format($corrente_total_serie,2,',','.') . $tipo_ampere}} </span>
+                                    </div>
+                                @endif                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    Tensões:
+                                </div>
+                                @if(isset($tensao_serie))
+                                    <div class="col-md-3">
+                                        V1: <span class="text-primary">{{ number_format($tensao_serie->r1,2,',','.') }}V</span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        V2: <span class="text-primary">{{ number_format($tensao_serie->r2,2,',','.') }}V</span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        V3: <span class="text-primary">{{ number_format($tensao_serie->r3,2,',','.') }}V</span>
+                                    </div>
+                                @endif                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    Potencias:
+                                </div>
+                                @if(isset($potencia_serie))
+                                    <div class="col-md-3">
+                                        P1: <span class="text-primary">{{ number_format($potencia_serie->p1,2,',','.') . $tipo_potencia}}</span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        P2: <span class="text-primary">{{ number_format($potencia_serie->p2,2,',','.') . $tipo_potencia}}</span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        P3: <span class="text-primary">{{ number_format($potencia_serie->p3,2,',','.') . $tipo_potencia}}</span>
+                                    </div>
+                                @endif                                
+                            </div>
                         </div>
                         <div class="col-md-4">
-                            Req em paralelo:
-                            @if(isset($req_paralelo))
-                                <span class="text-primary">{{ number_format($req_paralelo,2,',','.') }} {{ $tipo }}</span>
-                            @endif
+                            <div class="rowtext-center">
+                                <h3>Associados em Paralélo</h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    Req:
+                                </div>
+                                @if(isset($req_paralelo))
+                                    <div class="col-md-6">
+                                        <span class="text-primary">{{ number_format($req_paralelo,2,',','.') }} {{ $tipo }}</span>
+                                    </div>
+                                @endif                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    Corrente Total:
+                                </div>
+                                @if(isset($corrente_total_paralelo))
+                                    <div class="col-md-3">
+                                        <span class="text-primary">{{ number_format($corrente_total_paralelo,2,',','.') . $tipo_ampere}} </span>
+                                    </div>
+                                @endif                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    Correntes Parciais:
+                                </div>
+                                @if(isset($corrente_total_paralelo))
+                                    <div class="col-md-3">
+                                        I1:<span class="text-primary">{{ number_format($corrente_r1,2,',','.') . $tipo_ampere}} </span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        I2:<span class="text-primary">{{ number_format($corrente_r2,2,',','.') . $tipo_ampere}} </span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        I3:<span class="text-primary">{{ number_format($corrente_r3,2,',','.') . $tipo_ampere}} </span>
+                                    </div>
+                                @endif                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    Tensões:
+                                </div>
+                                @if(isset($tensao_paralela))
+                                    <div class="col-md-9">
+                                        V1 = V2 = V3: <span class="text-primary">{{ number_format($tensao_paralela->r1,2,',','.') }}V</span>
+                                    </div>
+                                @endif                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    Potencias:
+                                </div>
+                                @if(isset($potencia_paralela))
+                                    <div class="col-md-3">
+                                        P1: <span class="text-primary">{{ number_format($potencia_paralela->p1,2,',','.') . $tipo_potencia}}</span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        P2: <span class="text-primary">{{ number_format($potencia_paralela->p2,2,',','.') . $tipo_potencia}}</span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        P3: <span class="text-primary">{{ number_format($potencia_paralela->p3,2,',','.') . $tipo_potencia}}</span>
+                                    </div>
+                                @endif                                
+                            </div>
                         </div>
                         <div class="col-md-4">
-                            Req com r1 e r2 em paralelo, série com o r3:
-                            @if(isset($req_misto))
-                                <span class="text-primary"> {{ number_format($req_misto,2,',','.') }} {{ $tipo }}</span>
-                            @endif
+                            <div class="rowtext-center">
+                                <h3>Associados em Misto</h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    Req:
+                                </div>
+                                @if(isset($req_misto))
+                                    <div class="col-md-6">
+                                        <span class="text-primary">{{ number_format($req_misto,2,',','.') }} {{ $tipo }}</span>
+                                    </div>
+                                @endif                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    Corrente Total:
+                                </div>
+                                @if(isset($corrente_total_misto))
+                                    <div class="col-md-3">
+                                        <span class="text-primary">{{ number_format($corrente_total_misto,2,',','.') . $tipo_ampere}} </span>
+                                    </div>
+                                @endif                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    Tensões:
+                                </div>
+                                @if(isset($tensao_mista))
+                                    <div class="col-md-3">
+                                        V1: <span class="text-primary">{{ number_format($tensao_mista->r1,2,',','.') }}V</span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        V2: <span class="text-primary">{{ number_format($tensao_mista->r2,2,',','.') }}V</span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        V3: <span class="text-primary">{{ number_format($tensao_mista->r3,2,',','.') }}V</span>
+                                    </div>
+                                @endif                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    Potencias:
+                                </div>
+                                @if(isset($potencia_mista))
+                                    <div class="col-md-3">
+                                        P1: <span class="text-primary">{{ number_format($potencia_mista->p1,2,',','.') . $tipo_potencia}}</span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        P2: <span class="text-primary">{{ number_format($potencia_mista->p2,2,',','.') . $tipo_potencia}}</span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        P3: <span class="text-primary">{{ number_format($potencia_mista->p3,2,',','.') . $tipo_potencia}}</span>
+                                    </div>
+                                @endif                                
+                            </div>
                         </div>
                     </div>
                 </div>
