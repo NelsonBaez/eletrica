@@ -14,13 +14,13 @@ class HomeController extends Controller
             't' => [
                 'required',
                 'integer',
-                'min:0',
+                'min:1',
                 'max:12',
             ],
             'r1' => [
                 'required',
                 'integer',
-                'min:0',
+                'min:1',
                 function ($attribute, $value, $fail) use($request) {
                     if ($request->tipo === 'Kohm' AND $value > 100) {
                         $fail($attribute.' deve ser menor ou igual a 100 Kohm.');
@@ -32,7 +32,7 @@ class HomeController extends Controller
             'r2' => [
                 'required',
                 'integer',
-                'min:0',
+                'min:1',
                 function ($attribute, $value, $fail) use($request) {
                     if ($request->tipo === 'Kohm' AND $value > 100) {
                         $fail($attribute.' deve ser menor ou igual a 100 Kohm.');
@@ -44,7 +44,7 @@ class HomeController extends Controller
             'r3' => [
                 'required',
                 'integer',
-                'min:0',
+                'min:1',
                 function ($attribute, $value, $fail) use($request) {
                     if ($request->tipo === 'Kohm' AND $value > 100) {
                         $fail($attribute.' deve ser menor ou igual a 100 Kohm.');
